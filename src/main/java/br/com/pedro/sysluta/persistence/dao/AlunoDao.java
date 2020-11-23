@@ -31,14 +31,14 @@ public class AlunoDao {
 	public static void atualizaAluno(Aluno aluno) {
 		try {
 
-			String inserir = "UPDATE aluno SET nome = ?, dataNascimento = ?, mensalidade = ? , cpf = ?WHERE (id_aluno = ?)";
+			String inserir = "UPDATE aluno SET nome = ?, dataNascimento = ?, mensalidade = ? , cpf = ? WHERE (id_aluno = ?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
 
 			pst.setString(1, aluno.getNome());
 			pst.setString(2, aluno.getDataNascimento());
-			pst.setString(3, aluno.getCpf());
-			pst.setFloat(4, aluno.getMensalidade());
-			pst.setInt(4, aluno.getIdAluno());
+			pst.setFloat(3, aluno.getMensalidade());
+			pst.setString(4, aluno.getCpf());
+			pst.setInt(5, aluno.getIdAluno());
 
 			pst.executeUpdate();
 
@@ -52,7 +52,7 @@ public class AlunoDao {
 		try {
 			String inserir = "DELETE FROM aluno WHERE (id_aluno = ?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
-			pst.setInt(4, aluno.getIdAluno());
+			pst.setInt(1, aluno.getIdAluno());
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -205,6 +205,7 @@ public class UiAluno {
 						liberaBotoes(true);
 						liberaCampo(false);
 						liberabotoesNavegacao(true);
+					
 
 						AlunoDao.insere(aluno);
 					} else if (aluno.getCpf() != null) {

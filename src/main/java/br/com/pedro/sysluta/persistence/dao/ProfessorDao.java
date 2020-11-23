@@ -13,7 +13,7 @@ public class ProfessorDao {
 	public static void insere(Professor professor) {
 		try {
 
-			String inserir = "INSERT INTO professor (nome, cpf, dataNascimento, mensalidade) values(?,?,?,?)";
+			String inserir = "INSERT INTO professor (nome, cpf, dataNascimento) values(?,?,?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
 
 			pst.setString(1, professor.getNome());
@@ -30,7 +30,7 @@ public class ProfessorDao {
 	public static void atualizaprofessor(Professor professor) {
 		try {
 
-			String inserir = "UPDATE professor SET nome = ?, dataNascimento = ?, mensalidade = ? , cpf = ?WHERE (id_professor = ?)";
+			String inserir = "UPDATE professor SET nome = ?, dataNascimento = ? , cpf = ? WHERE id_professor = ?";
 			PreparedStatement pst = conn.prepareStatement(inserir);
 
 			pst.setString(1, professor.getNome());
@@ -50,7 +50,7 @@ public class ProfessorDao {
 		try {
 			String inserir = "DELETE FROM professor WHERE (id_professor = ?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
-			pst.setInt(4, professor.getIdProfessor());
+			pst.setInt(1, professor.getIdProfessor());
 
 		} catch (Exception e) {
 			e.printStackTrace();
