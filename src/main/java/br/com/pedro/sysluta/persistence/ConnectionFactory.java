@@ -2,7 +2,6 @@ package br.com.pedro.sysluta.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -57,18 +56,6 @@ public class ConnectionFactory {
 	}
 
 	
-	public static void insereProfessor(String nome, String cpf, String dataNascimento) {
-		try {
 
-			String inserir = "insert into sysluta.professores(nome,cpf,dataNascimento,mensalidade)values(?,?,?,?)";
-			PreparedStatement pst = conn.prepareStatement(inserir);
-			pst.setString(1, nome);
-			pst.setString(2, cpf);
-			pst.setString(3, dataNascimento);
-			pst.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 }
