@@ -11,8 +11,8 @@ public class AlunoDao {
 
 	private static Connection conn = ConnectionFactory.getConexaoMySQL();
 
-	public static void insere(Aluno aluno) {
-		try {
+	public static void insere(Aluno aluno) throws SQLException {
+		
 
 			String inserir = "INSERT INTO aluno (nome, cpf, dataNascimento, mensalidade) values(?,?,?,?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
@@ -24,13 +24,10 @@ public class AlunoDao {
 
 			pst.executeUpdate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 
-	public static void atualizaAluno(Aluno aluno) {
-		try {
+	public static void atualizaAluno(Aluno aluno) throws SQLException {
 
 			String inserir = "UPDATE aluno SET nome = ?, dataNascimento = ?, mensalidade = ? , cpf = ? WHERE (id_aluno = ?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
@@ -43,9 +40,6 @@ public class AlunoDao {
 
 			pst.executeUpdate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static void romoveAluno(Aluno aluno) throws SQLException {

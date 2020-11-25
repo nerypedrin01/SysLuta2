@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -158,10 +159,16 @@ public class UiProfessor {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(frame, "Deseja realmente apagar?", "OPA!!",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					try {
 
-					BancoDados.listaProfessor.remove(indexProfessor);
-					ProfessorDao.romoveProfessor(professor);
-					JOptionPane.showMessageDialog(frame, "Apagado com Sucesso");
+						BancoDados.listaProfessor.remove(indexProfessor);
+						ProfessorDao.romoveProfessor(professor);
+						JOptionPane.showMessageDialog(frame, "Apagado com Sucesso");
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(frame, e1.getMessage());
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} else {
 					mostraCampo();
 				}
@@ -188,19 +195,29 @@ public class UiProfessor {
 
 				} else {
 					if (professor.getCpf() == null) {
-						gravaVariaveis();
-						BancoDados.listaProfessor.add(professor);
-						liberaBotoes(true);
-						liberaCampo(false);
-						liberabotoesNavegacao(true);
-						ProfessorDao.insere(professor);
+						try {
+							gravaVariaveis();
+							BancoDados.listaProfessor.add(professor);
+							liberaBotoes(true);
+							liberaCampo(false);
+							liberabotoesNavegacao(true);
+							ProfessorDao.insere(professor);
+						} catch (SQLException e1) {
+							JOptionPane.showMessageDialog(frame, e1.getMessage());
+							e1.printStackTrace();
+						}
 
 					} else if (professor.getCpf() != null) {
-						gravaVariaveis();
-						liberaBotoes(true);
-						liberaCampo(false);
-						liberabotoesNavegacao(true);
-						ProfessorDao.atualizaprofessor(professor);
+						try {
+							gravaVariaveis();
+							liberaBotoes(true);
+							liberaCampo(false);
+							liberabotoesNavegacao(true);
+							ProfessorDao.atualizaprofessor(professor);
+						} catch (SQLException e1) {
+							JOptionPane.showMessageDialog(frame, e1.getMessage());
+							e1.printStackTrace();
+						}
 					}
 				}
 			}

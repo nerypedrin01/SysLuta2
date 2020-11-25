@@ -154,14 +154,14 @@ public class UiAluno {
 				try {
 					if (JOptionPane.showConfirmDialog(frame, "Deseja realmente apagar?", "OPA!!",
 							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-	
+
 						BancoDados.listaAluno.remove(indexAluno);
 						AlunoDao.romoveAluno(aluno);
 						JOptionPane.showMessageDialog(frame, "Apagado com Sucesso");
 					} else {
 						mostraCampo();
 					}
-				}catch (SQLException ex) {
+				} catch (SQLException ex) {
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(frame, ex.getMessage());
 				}
@@ -204,21 +204,30 @@ public class UiAluno {
 				} else {
 
 					if (aluno.getCpf() == null) {
-						txtCpf.requestFocus();
-						gravaVariaveis();
-						BancoDados.listaAluno.add(aluno);
-						liberaBotoes(true);
-						liberaCampo(false);
-						liberabotoesNavegacao(true);
-					
+						try {
+							txtCpf.requestFocus();
+							gravaVariaveis();
+							BancoDados.listaAluno.add(aluno);
+							liberaBotoes(true);
+							liberaCampo(false);
+							liberabotoesNavegacao(true);
 
-						AlunoDao.insere(aluno);
+							AlunoDao.insere(aluno);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+							JOptionPane.showMessageDialog(frame, e1.getMessage());
+						}
 					} else if (aluno.getCpf() != null) {
-						gravaVariaveis();
-						liberaBotoes(true);
-						liberaCampo(false);
-						liberabotoesNavegacao(true);
-						AlunoDao.atualizaAluno(aluno);
+						try {
+							gravaVariaveis();
+							liberaBotoes(true);
+							liberaCampo(false);
+							liberabotoesNavegacao(true);
+							AlunoDao.atualizaAluno(aluno);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+							JOptionPane.showMessageDialog(frame, e1.getMessage());
+						}
 					}
 				}
 

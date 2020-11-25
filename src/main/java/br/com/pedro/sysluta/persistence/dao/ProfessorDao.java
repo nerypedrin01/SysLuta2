@@ -2,6 +2,7 @@ package br.com.pedro.sysluta.persistence.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import br.com.pedro.sysluta.domain.Professor;
 import br.com.pedro.sysluta.persistence.ConnectionFactory;
@@ -10,8 +11,7 @@ public class ProfessorDao {
 
 	private static Connection conn = ConnectionFactory.getConexaoMySQL();
 
-	public static void insere(Professor professor) {
-		try {
+	public static void insere(Professor professor) throws SQLException {
 
 			String inserir = "INSERT INTO professor (nome, cpf, dataNascimento) values(?,?,?)";
 			PreparedStatement pst = conn.prepareStatement(inserir);
@@ -22,13 +22,9 @@ public class ProfessorDao {
 
 			pst.executeUpdate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
-	public static void atualizaprofessor(Professor professor) {
-		try {
+	public static void atualizaprofessor(Professor professor) throws SQLException {
 
 			String inserir = "UPDATE professor SET nome = ?, dataNascimento = ? , cpf = ? WHERE id_professor = ?";
 			PreparedStatement pst = conn.prepareStatement(inserir);
@@ -40,21 +36,14 @@ public class ProfessorDao {
 
 			pst.executeUpdate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
-	public static void romoveProfessor(Professor professor) {
+	public static void romoveProfessor(Professor professor) throws SQLException {
 
-		try {
 			String inserir = "DELETE FROM professor WHERE id_professor = ?";
 			PreparedStatement pst = conn.prepareStatement(inserir);
 			pst.setInt(1, professor.getIdProfessor());
 			pst.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }
