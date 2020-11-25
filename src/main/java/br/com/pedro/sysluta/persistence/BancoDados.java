@@ -25,9 +25,9 @@ public class BancoDados {
 
 			while (rs.next()) {
 				Aluno aluno = new Aluno();
-				aluno.setCpf(rs.getString(3));
-				aluno.setNome(rs.getString(2));
 				aluno.setIdAluno(Integer.parseInt(rs.getString(1)));
+				aluno.setNome(rs.getString(2));
+				aluno.setCpf(rs.getString(3));
 				aluno.setDataNascimento(rs.getString(4));
 				aluno.setMensalidade(Float.parseFloat(rs.getString(5)));
 

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -150,16 +151,20 @@ public class UiAluno {
 		btnApagar = new JButton("Apagar");
 		btnApagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(frame, "Deseja realmente apagar?", "OPA!!",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
-					BancoDados.listaAluno.remove(indexAluno);
-					AlunoDao.romoveAluno(aluno);
-					JOptionPane.showMessageDialog(frame, "Apagado com Sucesso");
-				} else {
-					mostraCampo();
+				try {
+					if (JOptionPane.showConfirmDialog(frame, "Deseja realmente apagar?", "OPA!!",
+							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+	
+						BancoDados.listaAluno.remove(indexAluno);
+						AlunoDao.romoveAluno(aluno);
+						JOptionPane.showMessageDialog(frame, "Apagado com Sucesso");
+					} else {
+						mostraCampo();
+					}
+				}catch (SQLException ex) {
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(frame, ex.getMessage());
 				}
-
 			}
 		});
 

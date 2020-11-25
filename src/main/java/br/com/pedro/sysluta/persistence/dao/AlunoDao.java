@@ -2,6 +2,7 @@ package br.com.pedro.sysluta.persistence.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import br.com.pedro.sysluta.domain.Aluno;
 import br.com.pedro.sysluta.persistence.ConnectionFactory;
@@ -47,16 +48,12 @@ public class AlunoDao {
 		}
 	}
 
-	public static void romoveAluno(Aluno aluno) {
+	public static void romoveAluno(Aluno aluno) throws SQLException {
 
-		try {
-			String inserir = "DELETE FROM aluno WHERE (id_aluno = ?)";
-			PreparedStatement pst = conn.prepareStatement(inserir);
-			pst.setInt(1, aluno.getIdAluno());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String remove = "DELETE FROM aluno WHERE id_aluno = ?";
+		PreparedStatement pst = conn.prepareStatement(remove);
+		pst.setInt(1, aluno.getIdAluno());
+		pst.executeUpdate();
 	}
 
 }

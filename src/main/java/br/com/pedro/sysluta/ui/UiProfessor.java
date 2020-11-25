@@ -160,7 +160,7 @@ public class UiProfessor {
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 					BancoDados.listaProfessor.remove(indexProfessor);
-					ProfessorDao.romoveprofessor(professor);
+					ProfessorDao.romoveProfessor(professor);
 					JOptionPane.showMessageDialog(frame, "Apagado com Sucesso");
 				} else {
 					mostraCampo();

@@ -45,13 +45,13 @@ public class ProfessorDao {
 		}
 	}
 
-	public static void romoveprofessor(Professor professor) {
+	public static void romoveProfessor(Professor professor) {
 
 		try {
-			String inserir = "DELETE FROM professor WHERE (id_professor = ?)";
+			String inserir = "DELETE FROM professor WHERE id_professor = ?";
 			PreparedStatement pst = conn.prepareStatement(inserir);
 			pst.setInt(1, professor.getIdProfessor());
-
+			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
